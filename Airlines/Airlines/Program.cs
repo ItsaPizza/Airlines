@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,17 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
+            var aircraftRepository = new AircraftRepository();
+            var aircraftModelRepository = new AircraftModelRepository();
+            var companyRepository = new CompanyRepository();
+            var countryRepository = new CountryRepository();
+            var reportGenerator = new ReportGenerator(aircraftRepository, aircraftModelRepository, companyRepository, countryRepository);
+            var htmlGenerator = new HTMLGenerator();
+            List<ReportItem> ataskaita = reportGenerator.GenerateReportAircraftInEurope();
+            string html = htmlGenerator.GenerateHTMLWithColor(ataskaita);
+
+            Console.WriteLine(html);
+            Console.ReadLine();
         }
     }
 }

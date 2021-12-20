@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.Repositories
+namespace Library
 {
-    internal class CountryRepository
+    public class CountryRepository
     {
         private List<Country> countries { get; set; } = new List<Country>();
         public CountryRepository()
@@ -241,6 +241,15 @@ namespace Library.Repositories
             countries.Add(new Country(244, "SV", "El Salvador", "Central America", false));
             countries.Add(new Country(245, "BO", "Bolivia", "South America", false));
             countries.Add(new Country(256, "PY", "Paraguay", "South America", false));
+        }
+        public List<Country> Retrieve()
+        {
+            return countries;
+        }
+        public Country Retrieve(int? countryId)
+        {
+            var country = countries.FirstOrDefault(x => x.Id == countryId);
+            return country;
         }
     }
 }
