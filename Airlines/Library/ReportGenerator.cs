@@ -34,6 +34,7 @@ namespace Library
             {
                 var companyId = aircraft.CompanyId;
                 var company = _companyRepository.Retrieve(companyId);
+                //if (company == null) { continue; }
                 var countryId = company.CountryId;
                 var country = _countryRepository.Retrieve(countryId);
                 var continent = country.Continent;

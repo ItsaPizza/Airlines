@@ -146,7 +146,7 @@ namespace Library
         {
             return companies;
         }
-        public Company Retrieve(int companyId)
+        public Company Retrieve(int? companyId)
         {
             var company = companies.FirstOrDefault(x => x.Id == companyId);
             return company;
