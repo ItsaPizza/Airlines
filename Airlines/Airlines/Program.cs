@@ -16,11 +16,8 @@ namespace ConsoleApp2
             var companyRepository = new CompanyRepository();
             var countryRepository = new CountryRepository();
             var reportGenerator = new ReportGenerator(aircraftRepository, aircraftModelRepository, companyRepository, countryRepository);
-            var htmlGenerator = new HTMLGenerator();
             List<ReportItem> ataskaita = reportGenerator.GenerateReportAircraftInEurope();
-            string html = htmlGenerator.GenerateHTMLWithColor(ataskaita);
 
-            Console.WriteLine(html);
             Console.ReadLine();
         }
     }

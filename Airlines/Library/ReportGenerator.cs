@@ -50,7 +50,7 @@ namespace Library
                 var reportItem = new ReportItem();
                 var aircraft = _aircraftRepository.Retrieve(id);
                 reportItem.AircraftTailNumber = aircraft.TailNumber; //TAIL NR
-                var aircraftModel = _aircraftModelRepository.Retrieve(id);
+                var aircraftModel = _aircraftModelRepository.Retrieve(aircraft.ModelId);
                 reportItem.ModelNumber = aircraftModel.Number; //Model NR
                 reportItem.ModelDescription = aircraftModel.Description; // Model Description
                 var companyId = aircraft.CompanyId;
