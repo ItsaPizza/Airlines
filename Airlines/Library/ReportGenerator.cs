@@ -60,6 +60,7 @@ namespace Library
                 var country = _countryRepository.Retrieve(countryId);
                 reportItem.CompanyCountryCode = country.Code; // Country Code
                 reportItem.CompanyCountryName = country.Name; // Country Name
+                reportItem.BelongsToEU = country.BelongsToEU;
                 ataskaita.Add(reportItem);                
             }
 
