@@ -26,15 +26,30 @@ namespace Library
         }
         public List<ReportItem> GenerateReportAircraftInEurope()
         {
+            string requiredContinent = "Europe";
+            List<int> aircraftIdsFromEurope = GenerateIdList(requiredContinent);
+            List<ReportItem> ataskaita = GenerateReport(aircraftIdsFromEurope);
+
+            return ataskaita;
+        }
+        public List<ReportItem> GenerateReportAircraftOtherContinents()
+        {
+            string requiredContinent = "Other";
+            List<int> aircraftIdsFromOther = GenerateIdList(requiredContinent);
+            List<ReportItem> ataskaita = GenerateReport(aircraftIdsFromOther);
+
+            return ataskaita;
+        }
+        private List<int> GenerateIdList(string requiredContinent)
+        {
             List<Aircraft> aircrafts = _aircraftRepository.Retrieve();
             List<int> aircraftIdsFromEurope = new List<int>();
-
-            
+            List<int> aircraftIdsFromOther = new List<int>();
             foreach (var aircraft in aircrafts)
             {
                 var companyId = aircraft.CompanyId;
                 var company = _companyRepository.Retrieve(companyId);
-                //if (company == null) { continue; }
+                if (company == null) { continue; }
                 var countryId = company.CountryId;
                 var country = _countryRepository.Retrieve(countryId);
                 var continent = country.Continent;
@@ -42,10 +57,25 @@ namespace Library
                 {
                     aircraftIdsFromEurope.Add(aircraft.Id);
                 }
+                else
+                {
+                    aircraftIdsFromOther.Add(aircraft.Id);
+                }
             }
+            if (requiredContinent == "Europe")
+            {
+                return aircraftIdsFromEurope;
+            }
+            else
+            {
+                return aircraftIdsFromOther;
+            }
+        }
+        private List<ReportItem> GenerateReport(List<int> idList)
+        {
             List<ReportItem> ataskaita = new List<ReportItem>();
 
-            foreach (var id in aircraftIdsFromEurope)
+            foreach (var id in idList)
             {
                 var reportItem = new ReportItem();
                 var aircraft = _aircraftRepository.Retrieve(id);
@@ -61,11 +91,18 @@ namespace Library
                 reportItem.CompanyCountryCode = country.Code; // Country Code
                 reportItem.CompanyCountryName = country.Name; // Country Name
                 reportItem.BelongsToEU = country.BelongsToEU;
-                ataskaita.Add(reportItem);                
+                if (country.Continent == "Europe")
+                {
+                    reportItem.BelongsToEurope = true;
+                }
+                else
+                {
+                    reportItem.BelongsToEurope = false;
+                }
+                ataskaita.Add(reportItem);
             }
 
             return ataskaita;
         }
-
     }
 }

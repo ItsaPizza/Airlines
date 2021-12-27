@@ -15,6 +15,7 @@ namespace Library
         public string CompanyCountryCode { get; set; } 
         public string CompanyCountryName { get; set; }
         public bool? BelongsToEU { get; set; }
+        public bool BelongsToEurope { get; set; }
 
         public ReportItem()
         {

@@ -95,12 +95,16 @@ namespace HTML_Generator
 
         private string GetLineColor(ReportItem item)
         {
-            if (item.BelongsToEU.HasValue || item.BelongsToEU == true)
+            if (item.BelongsToEU.HasValue && item.BelongsToEU == true)
             {
                 //sviesiai melynas
                 return "#99ccff";
             }
-
+            else if (item.BelongsToEurope == false)
+            {
+                //geltona
+                return "#FFFF00";
+            }
             //sviesiai raudonas
             return "#ffccff";
         }
