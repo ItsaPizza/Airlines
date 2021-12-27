@@ -42,14 +42,14 @@ namespace Library
             //    };
             //}
 
-        public void Sent()
+        public void Sent(string title, string body)
         {
             var client = new SmtpClient("smtp.mailtrap.io", 2525)
             {
                 Credentials = new NetworkCredential("858f07ff9e9a7f", "41a5a05ac4f813"),
                 EnableSsl = true
             };
-            client.Send("laurynas.balsys91@gmail.com", "laurynas.balsys91@gmail.com", "Hello world", "testbody");
+            client.Send("laurynas.balsys91@gmail.com", "laurynas.balsys91@gmail.com", title, body);
             Console.WriteLine("Sent");
             Console.ReadLine();
         }
